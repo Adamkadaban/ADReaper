@@ -5,7 +5,7 @@ GOCLEAN=$(GOCMD) clean
 GOTEST=$(GOCMD) test
 GOGET=$(GOCMD) get
 GOINSTALL=$(GOCMD) install
-BINARY_NAME=janus
+BINARY_NAME=ADReaper
 
 all: test build
 build:
