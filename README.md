@@ -49,7 +49,7 @@ PS C:\Users\redteamer\Desktop\shared> .\ADReaper.exe
             Filters to use for users/groups/computers
 
             list - lists all objects only
-            fulldata - list all objects with properties
+            full-data - list all objects with properties
             membership - lists all members from an object
 
             (default "list")

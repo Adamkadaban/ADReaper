@@ -30,7 +30,7 @@ func main() {
 
 	filterMsg := "\nFilters to use for users/groups/computers\n"
 	filterMsg += "\nlist - lists all objects only"
-	filterMsg += "\nfulldata - list all objects with properties"
+	filterMsg += "\nfull-data - list all objects with properties"
 	filterMsg += "\nmembership - lists all members from an object"
 	filterMsg += "\n\n"
 
