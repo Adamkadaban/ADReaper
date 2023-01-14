@@ -23,7 +23,7 @@ ADReaper performs enumeration with various commands that performs LDAP queries w
 ```c
 PS C:\Users\redteamer\Desktop\shared> .\ADReaper.exe
 
-      -command string
+      -command(s) string
 
             Command to run
                   dc              - to list domain controllers
@@ -202,6 +202,11 @@ To list AD objects with ```Unconstrained Delegation``` enabled,
 
 ```c
 .\ADReaper.exe -dc <dc.domain> -user <username> -password <password> -command unconstrained 
+```
+
+To list AD objects with ```Unconstrained Delegation``` enabled and all ```AS-REP roastable accounts```
+```c
+.\ADReaper.exe -dc <dc.domain> -user <username> -password <password> -command unconstrained,asreproast
 ```
 
 ## To-Do
