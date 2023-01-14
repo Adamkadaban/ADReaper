@@ -11,7 +11,7 @@ import (
 
 func main() {
 
-	commandStr := "\nCommand to run\n"
+	commandStr := "\nCommand(s) to run\n"
 	commandStr += "\n\tdc              - to list domain controllers"
 	commandStr += "\n\tdomain-trust    - to list domain trust"
 	commandStr += "\n\tusers           - to list all users"
@@ -59,11 +59,29 @@ func main() {
 	ldapServer := flag.String("dc", "", "\nEnter the DC\n")
 	ldapBind := flag.String("user", "", "\nEnter the Username\n")
 	ldapPassword := flag.String("password", "", "\nEnter the Password\n")
-	command := flag.String("command", "", commandStr)
+	commands := flag.String("command", "", commandStr)
 	filter := flag.String("filter", "list", filterMsg)
 	name := flag.String("name", "", nameMsg)
 	flag.Parse()
-	if len(*ldapServer) == 0 || len(*ldapBind) == 0 || len(*ldapPassword) == 0 || len(*command) == 0 || !(cmd[*command]) {
+
+	// get list of all commands by splitting on "," or " "
+	var commandList []string
+
+	if strings.Contains(*commands, ",") {
+		commandList = strings.Split(*commands, ",")
+	} else {
+		commandList = strings.Split(*commands, " ")
+	}
+
+	for _,command := range commandList{
+		if !(cmd[command]) || len(command) == 0 {
+			flag.PrintDefaults()
+			os.Exit(-1)
+		}
+	}
+
+
+	if len(*ldapServer) == 0 || len(*ldapBind) == 0 || len(*ldapPassword) == 0 {
 		flag.PrintDefaults()
 		os.Exit(-1)
 	}
@@ -88,5 +106,7 @@ func main() {
 	// fmt.Println(string(out))
 
 	//querying
-	ldapquery.LDAPlistquery(*ldapServer, *ldapBind, *ldapPassword, baseDN, *command, *filter, *name)
+	for _,command := range commandList {
+		ldapquery.LDAPlistquery(*ldapServer, *ldapBind, *ldapPassword, baseDN, command, *filter, *name)
+	}
 }

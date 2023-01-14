@@ -7,6 +7,7 @@ import (
 	"gopkg.in/ldap.v2"
 )
 
+
 func LDAP_QueryData(
 	conn *ldap.Conn,
 	baseDN string,
